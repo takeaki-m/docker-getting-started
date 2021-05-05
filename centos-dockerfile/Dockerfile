@@ -1,0 +1,19 @@
+FROM centos:7
+# FROM
+# ベースとするDockerイメージを指定。ローカルにない場合には、自動的に取得する
+
+RUN yum install -y java
+# RUN
+# OSのコマンドを実行する時に指定する
+# java のインストールを実行。-y オプションをつけて、インストールするかどうかを聞かれないようにしている
+
+ADD files/apache-tomcat-9.0.45.tar.gz /opt/
+# ADD
+# ファイルのコンテナへのコピーとtarの展開を行う
+# ADD <original> <destinateion>
+# 今回の場合は、Dockerfileと同階層にfiesディレクトリを作成し、その中にtomcatを配置する
+# COPYコマンドは、展開は行わずに、コピーだけを行う
+
+CMD [ "/opt/apache-tomcat-9.0.45/bin/catalina.sh", "run" ]
+# CMD
+# コンテナ起動時に実行するコマンドを記述する
